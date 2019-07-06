@@ -1,3 +1,41 @@
 body {
     margin-top: 40px;
 }
+.display_block {
+    display: block;
+}
+.margin_top_50 {
+    margin-top: 50px;
+}
+
+.friends_table.table td,
+.friends_table.table th {
+    vertical-align: middle;
+}
+.friends_table .success {
+    background-color: rgba(40, 167, 69, 0.3);
+}
+.friends_table .wait {
+    background-color: rgba(255, 193, 7, 0.3);
+}
+.friends_table .btn {
+    padding: 0 20px;
+}
+
+.purses {
+
+}
+.purses .card .btn-danger {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    padding: 0 5px;
+    font-size: 12px;
+}
+
+.purses .card .btn-warning {
+    float: right;
+    padding: 2px 10px;
+    margin: 0 -15px 0 0;
+    font-size: 12px;
+}

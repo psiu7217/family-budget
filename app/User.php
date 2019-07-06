@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -36,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function edit($id, $fields) {
+        $object = User::find($id);
+        $object->fill($fields);
+        if ($fields['new_password']) $object->password = Hash::make($fields['new_password']);
+        $object->save();
+
+        return true;
+    }
+
 }

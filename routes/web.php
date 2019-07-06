@@ -12,6 +12,19 @@
 */
 
 
-Route::get('/', 'HomeController@index')->name('home');
+//Если авторизированы
+Route::middleware('auth')->group(function () {
+
+    Route::resource('profile', 'ProfilesController');
+    Route::resource('purses', 'PursesController');
+
+    Route::get('/', 'HomeController@index')->name('home');
+
+    //Добавить в друзья
+    Route::get('/add_friend/{id}', 'ProfilesController@add_friend')->name('add_friend');
+    //Удалить из друзей
+    Route::get('/delete_friend/{id}', 'ProfilesController@delete_friend')->name('delete_friend');
+});
+
 
 Auth::routes();
