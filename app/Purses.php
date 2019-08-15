@@ -26,4 +26,15 @@ class Purses extends Model
         $object->fill($fields);
         $object->save();
     }
+
+    public static function transfer($fields) {
+
+        $object = Purses::find($fields['before']);
+        $object->cash = $object->cash - $fields['cash'];
+        $object->save();
+
+        $object = Purses::find($fields['after']);
+        $object->cash = $object->cash + $fields['cash'];
+        $object->save();
+    }
 }

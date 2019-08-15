@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Purses;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PursesController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,21 @@ class PursesController extends Controller
     {
         $data = [];
 
-        $data['purses'] = Purses::get_by_user(Auth::id());
+//        $data['categories'] = Category::get_by_user(Auth::id());
+        $data['categories'] = [];
+        $parents = Category::get_parent_by_user(Auth::id());
+        foreach ($parents as $parent) {
+            $child = Category::get_parent_by_user(Auth::id(), $parent->id);
 
-        return view('purses.index', $data);
+            $data['categories'][] = [
+                'id'        => $parent->id,
+                'title'     => $parent->title,
+                'plan'      => Category::get_parent_sum_by_user(Auth::id(), $parent->id),
+                'children'  => $child,
+            ];
+        }
+
+        return view('categories.index', $data);
     }
 
     /**
@@ -31,9 +43,13 @@ class PursesController extends Controller
     {
         $data = [];
 
+        $data['categories'] = Category::get_parent_by_user(Auth::id());
+
+//        $data['categories']->put('', 'Нету');
+
         $data['user_id'] = Auth::id();
 
-        return view('purses.create', $data);
+        return view('categories.create', $data);
     }
 
     /**
@@ -48,9 +64,9 @@ class PursesController extends Controller
             'title' => 'required',
         ]);
 
-        Purses::add($request->all());
+        Category::add($request->all());
 
-        return redirect()->route('purses.index');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -74,11 +90,12 @@ class PursesController extends Controller
     {
         $data = [];
 
-        $data['purse'] = Purses::find($id);
+        $data['category_info'] = Category::find($id);
+        $data['categories'] = Category::get_parent_by_user(Auth::id());
 
         $data['user_id'] = Auth::id();
 
-        return view('purses.edit', $data);
+        return view('categories.edit', $data);
     }
 
     /**
@@ -90,8 +107,8 @@ class PursesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Purses::edit($id, $request->all());
-        return redirect()->route('purses.index');
+        Category::edit($id, $request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -102,13 +119,7 @@ class PursesController extends Controller
      */
     public function destroy($id)
     {
-        Purses::destroy($id);
-        return redirect()->route('purses.index');
-    }
-
-    public function transfer(Request $request){
-        Purses::transfer($request->all());
-        return redirect()->route('purses.index');
-//        return $request->all();
+        Category::destroy($id);
+        return redirect()->route('categories.index');
     }
 }

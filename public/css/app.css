@@ -39,3 +39,54 @@ body {
     margin: 0 -15px 0 0;
     font-size: 12px;
 }
+
+.purses .max_sum {
+    float: left;
+}
+
+.categories {
+
+}
+.categories .card {
+    margin-bottom: 50px;
+}
+.categories .card .card-header,
+.categories .card .card-body .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.categories .card .card-header:hover {
+    background: rgba(52, 58, 64, 0.2);
+}
+.categories .card .btn_group {
+    display: flex;
+}
+.categories .card .btn_group a {
+    color: #fff;
+    margin-right: 15px;
+}
+.categories .card .card-body {
+    padding: 20px 0;
+}
+.categories .card .card-body .item {
+    padding: 5px 20px;
+    border-bottom: solid 1px;
+    transition: 0.3s;
+}
+.categories .card .card-body .item:nth-child(1) {
+    border-top: solid 1px;
+}
+.categories .card .card-body .item:nth-child(odd) {
+    background: rgba(52, 58, 64, 0.03);
+}
+.categories .card .card-body .item:hover {
+    background: rgba(52, 58, 64, 0.2);
+}
+.categories .card a {
+    color: #000;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}

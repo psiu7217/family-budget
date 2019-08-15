@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('profile', 'ProfilesController');
     Route::resource('purses', 'PursesController');
+    Route::resource('categories', 'CategoriesController');
 
     Route::get('/', 'HomeController@index')->name('home');
 
@@ -24,6 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/add_friend/{id}', 'ProfilesController@add_friend')->name('add_friend');
     //Удалить из друзей
     Route::get('/delete_friend/{id}', 'ProfilesController@delete_friend')->name('delete_friend');
+
+
+    //Перевод денег с кошелька на кошелек
+    Route::post('/transfer', 'PursesController@transfer')->name('transfer');
 });
 
 

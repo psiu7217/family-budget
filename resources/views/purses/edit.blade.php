@@ -41,7 +41,6 @@
                         </div>
 
 
-
                         <div class="form-group">
                             <div class="btn-create text-right col-sm-12">
                                 <button type="submit" class="btn btn-success" title="Сохранить">Сохранить</button>
@@ -52,6 +51,7 @@
                     </div>
                 </div>
             </div>
+
 
 
         </div>
