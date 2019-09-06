@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('profile', 'ProfilesController');
     Route::resource('purses', 'PursesController');
     Route::resource('categories', 'CategoriesController');
+    Route::resource('incomes', 'IncomesController');
 
     Route::get('/', 'HomeController@index')->name('home');
 

@@ -33,10 +33,13 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('categories.index') }}">Категории</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('purses.index') }}">Кошельки</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('categories.index') }}">Категории</a>
+                        <a class="nav-link" href="{{ route('incomes.index') }}">Доходы</a>
                     </li>
                 </ul>
 

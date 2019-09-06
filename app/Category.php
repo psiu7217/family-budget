@@ -22,6 +22,15 @@ class Category extends Model
             ['status', 1],
         ])->get();
     }
+
+    public static function get_child_by_user($user_id) {
+        return Category::where([
+            ['user_id', $user_id],
+            ['parent_id', '!=', NULL],
+            ['status', 1],
+        ])->get();
+    }
+
     public static function get_parent_sum_by_user($user_id, $category_id = NULL) {
         return Category::where([
             ['user_id', $user_id],
