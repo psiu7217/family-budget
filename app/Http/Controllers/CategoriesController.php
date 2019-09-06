@@ -119,7 +119,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
+        Category::archive($id);
+//        Category::destroy($id);
         return redirect()->route('categories.index');
     }
 }
