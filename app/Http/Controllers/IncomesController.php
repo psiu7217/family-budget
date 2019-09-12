@@ -76,7 +76,14 @@ class IncomesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [];
+
+        $data['income_info'] = Income::find($id);
+        $data['purses'] = Purses::get_by_user(Auth::id());
+
+        $data['user_id'] = Auth::id();
+
+        return view('incomes.edit', $data);
     }
 
     /**
@@ -88,7 +95,8 @@ class IncomesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Income::edit($id, $request->all());
+        return redirect()->route('incomes.index');
     }
 
     /**

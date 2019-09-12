@@ -23,7 +23,7 @@
                     <div class="col-sm-3">{{$item['title']}}</div>
                     <div class="col-sm-2">{{$item['cash']}}</div>
                     <div class="col-sm-3">{{$item['purse_id']}}</div>
-                    <div class="col-sm-2">{{$item['updated_at']}}</div>
+                    <div class="col-sm-2">{{$item['created_at']}}</div>
                     <div class="col-sm-2">
                         <div class="btn_group" style=" display: flex; ">
                             <a href="{{route('incomes.edit', $item['id'])}}" class="btn btn-warning"><i class="far fa-edit"></i></a>

@@ -13,12 +13,12 @@
             @endif
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">Добавить новую категорию</div>
+                    <div class="card-header">Редактировать доход</div>
                     <div class="card-body">
 
 
                         {{Form::open([
-                                'route' => ['categories.update', $category_info->id],
+                                'route' => ['incomes.update', $income_info->id],
                                 'files' => true,
                                 'method'  => 'put',
                                 'class' => 'form-horizontal'
@@ -28,35 +28,28 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Название</label>
                             <div class="col-sm-9">
-                                <input type="text" name="title" class="form-control" placeholder="Название" value="{{$category_info->title}}">
+                                <input type="text" name="title" class="form-control" placeholder="Название" value="{{$income_info->title}}">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Родительская категория</label>
+                            <label class="col-sm-3 col-form-label">Кошелек</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="parent_id">
-                                    <option value="" selected="selected">Нету</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{$category->id}}" @if($category_info->parent_id == $category->id) selected @endif>{{$category->title}}</option>
+                                    @foreach ($purses as $item)
+                                        <option value="{{$item->id}}" @if($income_info->purse_id == $item->id) selected @endif>{{$item->title}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">План</label>
+                            <label class="col-sm-3 col-form-label">Сумма</label>
                             <div class="col-sm-9">
-                                <input type="number" name="plan" step="0.01" class="form-control" placeholder="План" value="{{$category_info->plan}}">
+                                <input type="number" name="cash" step="0.01" class="form-control" placeholder="Сумма" value="{{$income_info->cash}}">
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Сортировка</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="sort" class="form-control" placeholder="Сортировка" value="{{$category_info->sort}}">
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="btn-create text-right col-sm-12">
