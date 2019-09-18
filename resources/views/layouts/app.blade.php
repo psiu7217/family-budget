@@ -33,6 +33,9 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('checks.index') }}">Чеки</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('categories.index') }}">Категории</a>
                     </li>
                     <li class="nav-item">

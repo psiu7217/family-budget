@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Category extends Model
 {
@@ -23,7 +24,8 @@ class Category extends Model
         ])->get();
     }
 
-    public static function get_child_by_user($user_id) {
+    public static function get_child_by_user($user_id = false) {
+        if (!$user_id) $user_id = Auth::id();
         return Category::where([
             ['user_id', $user_id],
             ['parent_id', '!=', NULL],
@@ -37,6 +39,26 @@ class Category extends Model
             ['parent_id', $category_id],
             ['status', 1],
         ])->sum('plan');
+    }
+
+    public static function get_all_category_by_user($user_id = false) {
+        if (!$user_id) $user_id = Auth::id();
+
+        $results = [];
+
+        $main_categories = self::get_parent_by_user($user_id);
+
+       foreach ($main_categories as $category) {
+           $children = self::get_parent_by_user($user_id, $category->id);
+
+           $results[] = [
+               'main'   => $category,
+               'child'  => $children,
+           ];
+       }
+
+       return $results;
+
     }
 
 
@@ -56,7 +78,7 @@ class Category extends Model
             ['status', 0],
         ])->first();
 
-        //Если наши, вынимаем из архива, иначе создаем новую
+        //Если нашли, вынимаем из архива, иначе создаем новую
         if ($object) {
             $object->status = 1;
             $object->plan = $fields['plan'];
@@ -74,4 +96,6 @@ class Category extends Model
         $object->status = 0;
         $object->save();
     }
+
+
 }
